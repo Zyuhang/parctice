@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            padding-left: 50px;
+        }
+
+        button {
+            margin: 10px 0;
+        }
+
+        li {
+            list-style: none;
+            width: 600px;
+            line-height: 24px;
+            border: 1px dashed #ccc;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <textarea name="" id="text" cols="80" rows="20"></textarea>
+    <br>
+    <button>发布微博</button>
+    <div class="microblog">
+        <ul>
+
+        </ul>
+    </div>
+    <script>
+        var text=document.querySelector("#text");
+        var btn=document.querySelector("button");
+        var list=document.querySelector("ul");
+        text.focus();
+        btn.onclick=document.onkeyup=function(e){
+            if(text.value!==""){
+                if(e.type=="keyup" && e.keyCode!==13) return;
+                var li=document.createElement("li");
+                li.innerHTML=text.value + "<a href = 'javaScript:void(0)'>删除</a>";
+                if(list.children.length>=1){
+                    list.insertBefore(li,list.children[0]);
+                }else{
+                    list.appendChild(li);
+                }
+                text.value="";
+                text.focus();
+                           
+            }else{
+                alert("没有输入内容");
+            }
+        } 
+        list.onclick=function(e){
+            var e = e || window.event;
+            if(e.target.nodeName==="A"){
+                if(window.confirm("你确定要删除吗")){
+                    e.target.parentElement.parentElement.removeChild(e.target.parentElement);
+                }               
+            }
+        }   
+    </script>
+</body>
+</html>

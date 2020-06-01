@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        function Drag(){
+            this.box=document.querySelector(".box");
+            this.shortX=null;
+            this.shortY=null;
+            
+        }
+
+        Drag.prototype.init=function(){
+            let _this=this;
+            this.box.onmousedown=function(e){
+                var e = e || window.event;                
+                _this.down(e);
+                document.onmousemove=function(e){
+                    var e = e || window.event;
+                    _this.move(e);
+                }
+                document.onmouseup=function(){
+                    _this.up();
+                }
+            }
+            this.down=function(e){
+                this.shortX=e.offsetX;
+                this.shortY=e.offsetY;
+            }
+            this.move=function(e){
+                this.box.style.left=e.clientX-this.shortX+"px";
+                this.box.style.top=e.clientY-this.shortY+"px";
+            }
+            this.up=function(){
+                document.onmousemove=null;
+                document.onmouseup=null;
+            }
+        }
+
+        new Drag().init();
+    </script>
+</body>
+</html>

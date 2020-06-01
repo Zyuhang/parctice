@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var str="dsadasffsazxcknhjaksfjaklzscnlzjvi";
+        str=str.split("").sort().join("");
+        var strarr=str.split("");
+        
+        var res=strarr.reduce(function(prev,curr,index,array){
+            prev[curr] = prev[curr]+1 || 1;
+            return prev;
+        },{});
+        console.log(res);
+    </script>
+</body>
+</html>
